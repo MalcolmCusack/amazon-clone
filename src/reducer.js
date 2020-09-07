@@ -1,5 +1,13 @@
 export const initialState = {
-    basket: [],
+    basket: [
+        {
+            id: "123",
+            title: "New Product",
+            price: 69.69 ,
+            rating: 5,
+            image: "https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_SX466_.jpg",
+        },
+    ],
     user: null,
 };
 
@@ -16,9 +24,19 @@ const reducer = (state, action) => {
              };
             break;
         case 'REMOVE_FROM_BASKET':
-            //REMOVE item logic
-            return { state }
-            break;
+            let newBasket = [...state.basket]; //copying the basket state to new basket
+            
+            // checking to see if product exists
+            const index = state.basket.findIndex((basketItem) => basketItem.id === action.id);
+
+            if (index >=0) {
+                newBasket.splice(index, 1); //remove from basket
+            } else {
+                console.warr('Cant remove product (id: ${action.id} ) as its not in the basket');
+            }
+
+            return { ...state, 
+                basket: newBasket };
         default:
             return state; 
     }
