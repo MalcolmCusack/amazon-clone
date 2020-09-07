@@ -1,13 +1,5 @@
 export const initialState = {
-    basket: [
-        {
-            id: "123",
-            title: "New Product",
-            price: 69.69 ,
-            rating: 5,
-            image: "https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_SX466_.jpg",
-        },
-    ],
+    basket: [],
     user: null,
 };
 
@@ -26,7 +18,6 @@ const reducer = (state, action) => {
                 basket: [...state.basket, action.item] 
                 // returning the current state of the basket plus the new state
              };
-            break;
         case 'REMOVE_FROM_BASKET':
             let newBasket = [...state.basket]; //copying the basket state to new basket
             

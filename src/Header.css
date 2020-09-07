@@ -13,6 +13,7 @@
     width: 100px;
     margin: 0 20px;
     margin-top: 18px;
+    
 }
 
 .header_option_basket {
@@ -55,7 +56,7 @@
 }
 
 .header_searchInput {
-    height: 12px;
+    height: 14px;
     padding: 10px;
     border: none;
     width:  100%;

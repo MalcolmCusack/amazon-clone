@@ -26,7 +26,10 @@
     background-color: #f0c14b;
     border: 1px solid;
     margin-top: 10px;
-    border-color: white;
+    border-color: #aBB734 #9c7e31 #846a29;
+    color: #111111;
     max-width: 150px;
     align-self: center;
+    border-radius: 2px;
+    
 }
