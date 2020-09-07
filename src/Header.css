@@ -4,6 +4,9 @@
     object-fit: contain;
     display: flex;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header_logo {
