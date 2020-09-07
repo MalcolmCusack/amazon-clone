@@ -53,7 +53,7 @@ function Login() {
                     <input 
                         value={password} 
                         type="password" 
-                        onChange={event => setEmail(event.target.value)}
+                        onChange={event => setPassword(event.target.value)}
                         />
                     <button onClick={login} type="submit">Sign In</button>
                 </form>

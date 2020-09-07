@@ -11,6 +11,11 @@ export const getBasketTotal = (basket) =>
 const reducer = (state, action) => {
     console.log(action);
     switch(action.type) {  //mutable updates
+        case "SET_USER":
+            return {
+                ...state,
+                user: action.user,
+            };
         case 'ADD_TO_BASKET':
             //Logic for basket
             return { 
