@@ -1,18 +1,20 @@
 import userEvent from '@testing-library/user-event';
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Payment.css";
 import { useStateValue } from './StateProvider';
 import CheckoutProduct from './CheckoutProduct';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import {getBasketTotal} from './reducer';
-import { instance } from './axios';
+import axios from './axios';
 
 
 function Payment() {
     const [{ basket, user }, dispatch] = useStateValue();
 
+    const history = useHistory();
+    
     const stripe = useStripe();
     const elements = useElements();
 
@@ -24,11 +26,14 @@ function Payment() {
 
     useEffect( () => {
         
+        // whenver the basket changes it will update the stripe secret
         const getClientSecret = async () => {
             const response = await axios({
                 method: 'post',
-                url: `/payments/create?total=${getBasketTotal(basket) }`
-            })
+                // stripe wants currency subunits
+                url: `/payments/create?total=${getBasketTotal(basket) * 100 }`
+            });
+            setClientSecret(response.data.clientSecret)
         }
 
         getClientSecret();
@@ -38,6 +43,20 @@ function Payment() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setProcessing(true);
+
+        const payload = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardElement)
+            }
+        }).then(({ paymentIntent }) => {
+            // paymentintent is the payment confirmation
+
+            setSucceeded(true);
+            setError(null);
+            setProcessing(false);
+
+            history.replace('/orders')
+        })
 
         //const payload = await stripe 
     }
