@@ -7,6 +7,7 @@ import Checkout from "./Checkout"
 import Login from "./Login"
 import { useStateValue } from './StateProvider';
 import { auth } from './firebase';
+import Payment from "./Payment";
 
 function App() {
   const [{ basket }, dispatch] = useStateValue(); //datalayer
@@ -32,9 +33,6 @@ function App() {
     }
   }, [] );
 
-
-
-
   return (
     <Router>
       <div className="app">
@@ -45,6 +43,10 @@ function App() {
           </Route>
           <Route path = "/login">
             <Login />
+          </Route>
+          <Route path='/payment'>
+            <Header />
+            <Payment />
           </Route>
           <Route path="/">
             <Header />
