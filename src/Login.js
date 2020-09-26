@@ -16,7 +16,7 @@ function Login() {
             .then((auth) => {      //checks auth with firebase and sends back to homepage
                 //other wise alerts of wrong auth
                 history.push('/');
-        }).catch(e => alert(e.message));
+        }).catch(error => alert(error.message));
     }
 
     // Authentication => email/pass enable
@@ -25,9 +25,12 @@ function Login() {
         event.preventDefault(); //prevents referesh
 
         auth.createUserWithEmailAndPassword(email, password)
-            .then(auth => {         //creates new user in firebase db
+            .then(auth => {   
+                if (auth) {
+                    history.push('/')
+                }      //creates new user in firebase db
 
-            }).catch((e) => alert(e.message));
+            }).catch((error) => alert(error.message));
     }
 
     return (

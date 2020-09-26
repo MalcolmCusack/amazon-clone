@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event';
 import React, { useState, useEffect } from 'react';
 import "./Payment.css";
 import { useStateValue } from './StateProvider';
@@ -16,10 +15,10 @@ function Payment() {
     const stripe = useStripe();
     const elements = useElements();
 
-    const [error, setError ] = useState(null);
-    const [disabled, setDisabled] = useState(true);
     const [succeeded, setSucceeded] = useState(false);
     const [processing, setProcessing] = useState("");
+    const [error, setError ] = useState(null);
+    const [disabled, setDisabled] = useState(true);
     const [clientSecret, setClientSecret] = useState(true);
 
     useEffect( () => {
@@ -29,7 +28,7 @@ function Payment() {
             const response = await axios({
                 method: 'post',
                 // stripe wants currency subunits
-                url: `/payments/create?total=${getBasketTotal(basket) * 100 }`
+                url: `/payments/create?total=${getBasketTotal(basket) * 100}`
             });
             setClientSecret(response.data.clientSecret)
         }
@@ -41,8 +40,8 @@ function Payment() {
 
     
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         setProcessing(true);
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
@@ -62,9 +61,9 @@ function Payment() {
         //const payload = await stripe 
     }
 
-    const handleChange = e => {
-        setDisabled(e.empty);
-        setError(e.error ? e.error.message : "");
+    const handleChange = event => {
+        setDisabled(event.empty);
+        setError(event.error ? event.error.message : "");
     }
 
     return (
@@ -117,9 +116,9 @@ function Payment() {
                             <div className='payment_priceContainer'>
                             <CurrencyFormat
                                 renderText={(value) => (
-                                    <>
-                                        <h3>Order Total: {value}</h3>
-                                    </>
+                                    
+                                    <h3>Order Total: {value}</h3>
+                                    
                                 )}
 
                                 decimalScale={2}
