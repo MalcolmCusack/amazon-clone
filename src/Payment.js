@@ -11,7 +11,6 @@ import axios from './axios';
 
 function Payment() {
     const [{ basket, user }, dispatch] = useStateValue();
-
     const history = useHistory();
 
     const stripe = useStripe();
@@ -36,8 +35,10 @@ function Payment() {
         }
 
         getClientSecret();
-    }, [basket]);
-    
+    }, [basket])
+
+    console.log("Secret is >>> ", clientSecret);
+
     
 
     const handleSubmit = async (e) => {
@@ -49,7 +50,7 @@ function Payment() {
                 card: elements.getElement(CardElement)
             }
         }).then(({ paymentIntent }) => {
-            // paymentintent is the payment confirmation
+            // payment intent is the payment confirmation
 
             setSucceeded(true);
             setError(null);
