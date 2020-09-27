@@ -1,1 +1,14 @@
 Web / API server started at http://localhost:4000
+node[1779]: ../src/node.cc:640:void node::ResetStdio(): Assertion `!(err != 0) || (err == -1 && (*__error()) == 1)' failed.
+ 1: 0x1011d1cc5 node::Abort() (.cold.1) [/usr/local/bin/node]
+ 2: 0x10009f919 node::Abort() [/usr/local/bin/node]
+ 3: 0x10009f781 node::Assert(node::AssertionInfo const&) [/usr/local/bin/node]
+ 4: 0x10007269b node::ResetStdio() [/usr/local/bin/node]
+ 5: 0x10007228d node::SignalExit(int) [/usr/local/bin/node]
+ 6: 0x7fff698bf5fd _sigtramp [/usr/lib/system/libsystem_platform.dylib]
+ 7: 0x10302e018 
+ 8: 0x100944c51 uv_run [/usr/local/bin/node]
+ 9: 0x1000e1f15 node::NodeMainInstance::Run() [/usr/local/bin/node]
+10: 0x100075ae5 node::Start(int, char**) [/usr/local/bin/node]
+11: 0x7fff696c6cc9 start [/usr/lib/system/libdyld.dylib]
+12: 0x2 
