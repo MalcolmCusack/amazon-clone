@@ -7,6 +7,7 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import {getBasketTotal} from './reducer';
 import axios from './axios';
+import {db} from './firebase';
 
 function Payment() {
     const [{ basket, user }, dispatch] = useStateValue();
@@ -23,7 +24,7 @@ function Payment() {
 
     useEffect( () => {
         
-        // whenver the basket changes it will update the stripe secret
+        // whenever the basket changes it will update the stripe secret
         const getClientSecret = async () => {
             const response = await axios({
                 method: 'post',
@@ -37,7 +38,8 @@ function Payment() {
     }, [basket])
 
     console.log("Secret is >>> ", clientSecret);
-
+    console.log("Total >>> ", getBasketTotal(basket) * 100)
+    console.log(user);
     
 
     const handleSubmit = async (event) => {
@@ -50,10 +52,21 @@ function Payment() {
             }
         }).then(({ paymentIntent }) => {
             // payment intent is the payment confirmation
+            
+            // gets and sets order history
+            db.collection('users').doc(user?.uid).collection('orders').doc(paymentIntent.id).set({
+                basket: basket,
+                amount: paymentIntent.amount,
+                created: paymentIntent.created
+            })
 
             setSucceeded(true);
             setError(null);
             setProcessing(false);
+
+            dispatch({
+                type: 'EMPTY_BASKET'
+            })
 
             history.replace('/orders')
         })

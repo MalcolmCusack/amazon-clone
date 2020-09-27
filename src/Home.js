@@ -22,7 +22,7 @@ function Home() {
                 <Product
                     id="234087234087"
                     title = "Tracfone Carrier-Locked Alcatel MyFlip 4G Prepaid Flip Phone"
-                    price ={19.99}
+                    price ={20}
                     rating={4}
                     image="https://m.media-amazon.com/images/I/6168YmN7qsL._AC_UY436_FMwebp_QL65_.jpg"
                 />
@@ -31,7 +31,7 @@ function Home() {
                 <Product
                      id="414368523445"
                       title = "TChop Sabers Light Up LightSaber Chopsticks"
-                      price ={9.97}
+                      price ={9}
                       rating={5}
                       image="https://m.media-amazon.com/images/I/81ABckNfDjL._AC_UY436_FMwebp_QL65_.jpg"
                 />
@@ -43,10 +43,10 @@ function Home() {
                     image="https://m.media-amazon.com/images/I/710hnPwOzqL._AC_UY436_FMwebp_QL65_.jpg"
                 />
                 <Product
-                    id="865434545"
+                    id="340897713847"
                     title = "Uranium Ore"
-                    price ={39.95}
-                    rating={5}
+                    price ={40.99}
+                    rating={4}
                     image="https://images-na.ssl-images-amazon.com/images/I/91tal9iiB1L._SL1500_.jpg"
                 />
             </div>
